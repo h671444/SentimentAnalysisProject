@@ -1,6 +1,7 @@
 env/
 venv/
-data/raw
+data/raw/*
+data/processed/*
 .DS_Store
 __pycache__/
 *.pyc

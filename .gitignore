@@ -2,6 +2,7 @@ env/
 venv/
 data/raw/*
 data/processed/*
+data/processed/amazon_reviews_processed.csv
 .DS_Store
 __pycache__/
 *.pyc

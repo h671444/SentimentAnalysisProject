@@ -1,15 +1,18 @@
-import tensorflow as tf
+import os
+import pickle
+from typing import Tuple, List, Optional, Union
+
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from pandas import Series
+from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
 from tensorflow.keras.models import load_model, Sequential
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pickle
-import os
-import numpy as np
-from typing import Tuple, List, Optional
-from pandas import Series
+
+# local imports
+from src.preprocessing import clean_text, remove_stopwords
 
 def load_artifacts(model_path: str, tokenizer_path: str) -> Tuple[Sequential, Tokenizer]:
     # Loads a saved Keras model and its corresponding tokenizer
@@ -26,10 +29,30 @@ def load_artifacts(model_path: str, tokenizer_path: str) -> Tuple[Sequential, To
     print("Artifacts loaded.")
     return model, tokenizer
 
-def preprocess_for_predict(text_data: Series, tokenizer: Tokenizer, maxlen: int) -> np.ndarray:
-    sequences = tokenizer.texts_to_sequences(text_data)
+def preprocess_for_predict(text_data: Union[str, Series], tokenizer: Tokenizer, maxlen: int) -> np.ndarray:
+    # convert single string to list if needed
+    if isinstance(text_data, str):
+        text_data = [text_data]
+    
+    # apply preprocessing using existing functions
+    cleaned_texts = [clean_text(text) for text in text_data]
+    cleaned_texts = [remove_stopwords(text) for text in cleaned_texts]
+    
+    # convert to sequences and pad
+    sequences = tokenizer.texts_to_sequences(cleaned_texts)
     padded_sequences = pad_sequences(sequences, maxlen=maxlen, padding='post')
     return padded_sequences
+
+def predict_sentiment(text: str, model: Sequential, tokenizer: Tokenizer, maxlen: int = 70) -> Tuple[str, float]:
+
+    processed_text = preprocess_for_predict(text, tokenizer, maxlen)
+    
+    prediction = model.predict(processed_text, verbose=0)[0][0]
+    
+    sentiment = "Positive" if prediction > 0.5 else "Negative"
+    confidence = float(prediction if prediction > 0.5 else 1 - prediction)
+    
+    return sentiment, confidence
 
 def evaluate_model(model: Sequential, X_test_pad: np.ndarray, y_test: Series,
                    batch_size: int = 64) -> Tuple[float, float, np.ndarray, np.ndarray]:

@@ -1,4 +1,3 @@
-import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import (
     Embedding, Conv1D, MaxPooling1D, GlobalMaxPooling1D, Dense, Dropout

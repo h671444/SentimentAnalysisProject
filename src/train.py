@@ -1,4 +1,3 @@
-import tensorflow as tf
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -8,6 +7,7 @@ import matplotlib.pyplot as plt
 from typing import Tuple, Dict
 from pandas import Series
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.optimizers import Adam
 
 # assumes model builders are in src/models/
 from models.cnn import build_cnn_model
@@ -21,7 +21,7 @@ def train_model(X_train: Series, y_train: Series, X_val: Series, y_val: Series,
                 epochs: int = 20,
                 batch_size: int = 64,
                 learning_rate: float = 0.001,
-                model_save_dir: str = '../models/trained', # More generic save dir
+                model_save_dir: str = '../models/cnn', 
                 model_name: str = 'best_model') -> Tuple[Sequential, Dict, Tokenizer]:
 
     print("Tokenizing data...")
@@ -45,7 +45,7 @@ def train_model(X_train: Series, y_train: Series, X_val: Series, y_val: Series,
     model.summary() # print model summary to console
 
     print("Compiling model...")
-    model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate),
+    model.compile(optimizer=Adam(learning_rate=learning_rate),
                   loss='binary_crossentropy',
                   metrics=['accuracy'])
 

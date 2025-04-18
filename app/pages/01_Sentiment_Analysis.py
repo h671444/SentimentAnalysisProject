@@ -21,7 +21,7 @@ st.write("Enter a review below and click the button to predict the sentiment.")
 
 input_text = st.text_area("Enter a review:")
 st.write("Select model for prediction:")
-model_name = st.selectbox("Model", ["CNN"])
+model_name = st.selectbox("Model", ["CNN", "RNN"])
 
 if st.button("Predict"):
     if not input_text:
@@ -30,8 +30,11 @@ if st.button("Predict"):
         st.write("Please select a model to use for prediction")
     else:
         # Load model and tokenizer
-        model_path = os.path.join(PROJECT_ROOT, 'models', 'cnn', 'best_model.keras')
-        tokenizer_path = os.path.join(PROJECT_ROOT, 'models', 'cnn', 'tokenizer.pickle')
+
+        model_dir = model_name.lower()
+
+        model_path = os.path.join(PROJECT_ROOT, 'models', model_dir, 'best_model.keras')
+        tokenizer_path = os.path.join(PROJECT_ROOT, 'models', model_dir, 'tokenizer.pickle')
         model, tokenizer = load_artifacts(model_path, tokenizer_path)
         
         if model and tokenizer:

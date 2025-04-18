@@ -15,13 +15,13 @@ st.set_page_config(
 
 st.title("Sentiment Analysis")
 
-st.write("This app uses a pre-trained model to predict the sentiment of Amazon reviews.")
+st.write("Analyze the sentiment of any text using our advanced deep learning models. Choose between CNN, GRU, or LSTM architectures to get predictions with confidence scores.")
 
 st.write("Enter a review below and click the button to predict the sentiment.")
 
 input_text = st.text_area("Enter a review:")
 st.write("Select model for prediction:")
-model_name = st.selectbox("Model", ["CNN", "RNN"])
+model_name = st.selectbox("Model", ["CNN", "RNN-GRU", "RNN-LSTM"])
 
 if st.button("Predict"):
     if not input_text:

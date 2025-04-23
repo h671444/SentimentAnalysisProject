@@ -11,3 +11,38 @@ This project implements and compares different deep learning architectures for s
 Each model was trained on a dataset of Amazon product reviews and evaluated using standard metrics like accuracy, precision, recall, and F1-score. The models can be used for binary sentiment classification (positive/negative) on any text input.
 
 ## Project Structure
+
+- **app/**: Application code for deploying the models.
+  - **Home.py**: Main application script for running the sentiment analysis app.
+  - **components/**: UI components and utilities for the app interface.
+  
+- **data/**: Directory for storing raw and processed datasets.
+  - **raw/**: Contains the original dataset files.
+  - **processed/**: Stores preprocessed data ready for model input.
+
+- **models/**: Saved trained models (weights, checkpoints).
+
+- **src/**: Contains the source code for model implementation and training.
+  - **models/**: Includes scripts for building CNN, GRU, and LSTM models.
+  - **preprocessing.py**: Handles data loading, cleaning, and preprocessing.
+  - **train.py**: Script for training models with specified configurations.
+  - **evaluate.py**: Contains functions for evaluating model performance.
+
+- **notebooks/**: Exploratory analysis and development notebooks.
+  - **cnn_nbs**: Initial data analysis and visualization.
+  - **rnn_nbs**: Initial data analysis and visualization.
+
+- **reports/**: 
+  - **SentimentAnalysisReport.pdf**: Detailed project report.
+
+- **src/**: Structured, reusable, and production-quality code.
+  - **preprocessing.py**: Data cleaning, preprocessing, feature engineering.
+  - **models/**: 
+    - **cnn.py**: CNN implementation.
+    - **rnn-gru.py**: RNN-GRU implementation.
+    - **rnn-lstm.py**: RNN-LSTM implementation.
+  - **train.py**: Main training pipeline with hyperparameter tuning support.
+  - **evaluate.py**: Evaluation script (accuracy, confusion matrices, metrics).
+
+- **requirements.txt**: Lists all required Python libraries for a reproducible environment.
+- **.gitignore**: Standard Python gitignore file.

@@ -22,12 +22,6 @@ Each model was trained on a dataset of Amazon product reviews and evaluated usin
 
 - **models/**: Saved trained models (weights, checkpoints).
 
-- **src/**: Contains the source code for model implementation and training.
-  - **models/**: Includes scripts for building CNN, GRU, and LSTM models.
-  - **preprocessing.py**: Handles data loading, cleaning, and preprocessing.
-  - **train.py**: Script for training models with specified configurations.
-  - **evaluate.py**: Contains functions for evaluating model performance.
-
 - **notebooks/**: Exploratory analysis and development notebooks.
   - **cnn_nbs**: Initial data analysis and visualization.
   - **rnn_nbs**: Initial data analysis and visualization.

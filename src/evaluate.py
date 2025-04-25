@@ -42,10 +42,14 @@ def preprocess_for_predict(text_data: Union[str, Series], tokenizer: Tokenizer, 
     padded_sequences = pad_sequences(sequences, maxlen=maxlen, padding='post')
     return padded_sequences
 
-def predict_sentiment(text: str, model: Sequential, tokenizer: Tokenizer, maxlen: int) -> Tuple[str, float]:
+def predict_sentiment(text: str, model: Sequential, tokenizer: Tokenizer) -> Tuple[str, float]:
     """Predicts sentiment for a single string of text."""
+    # Infer maxlen from model's input shape
+    maxlen = model.input_shape[1]
+    if maxlen is None:
+        raise ValueError("Could not infer maxlen from model input shape.")
+    
     processed_text = preprocess_for_predict(text, tokenizer, maxlen)
-
     prediction = model.predict(processed_text, verbose=0)[0][0]
     
     sentiment = "Positive" if prediction > 0.5 else "Negative"

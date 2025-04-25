@@ -7,3 +7,5 @@ data/processed/amazon_reviews_processed.csv
 .DS_Store
 __pycache__/
 *.pyc
+!data/raw/.gitkeep
+!data/processed/.gitkeep

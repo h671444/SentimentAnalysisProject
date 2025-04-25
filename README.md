@@ -48,8 +48,8 @@ This project uses the Amazon Product Reviews dataset available on Kaggle.
 
 1.  **Clone Repository:**
     ```bash
-    git clone <repository_url>
-    cd <repository_directory>
+    git clone <https://github.com/h671444/SentimentAnalysisProject>
+    cd <SentimentAnalysisProject>
     ```
 2.  **Create Virtual Environment** (Recommended):
     ```bash

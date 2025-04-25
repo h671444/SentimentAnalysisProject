@@ -1,7 +1,7 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, GRU, Dense, Dropout, SpatialDropout1D, Bidirectional
 
-def build_rnn_model(max_vocab: int,
+def build_gru_model(max_vocab: int,
                     embedding_dim: int,
                     maxlen: int,
                     dropout_rate: float = 0.5,

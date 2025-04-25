@@ -1,13 +1,13 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense, SpatialDropout1D, Bidirectional
 
-def build_lstm_model(vocab_size: int = 10000,
-                    embedding_dim: int = 64,
-                    lstm_units: int = 64,
-                    dropout_rate: float = 0.3,
-                    maxlen: int = 80) -> Sequential:
-    
-    print(f"Building LSTM: vocab={vocab_size}, embed_dim={embedding_dim}, lstm_units={lstm_units}, dropout={dropout_rate}, maxlen={maxlen}")
+def build_lstm_model(vocab_size: int,
+                     embedding_dim: int,
+                     maxlen: int,
+                     dropout_rate: float,
+                     lstm_units: int) -> Sequential:
+
+    print(f"Building LSTM: vocab={vocab_size}, embed_dim={embedding_dim}, maxlen={maxlen}, dropout={dropout_rate}, lstm_units={lstm_units}")
 
     model = Sequential([
         Embedding(
@@ -26,6 +26,6 @@ def build_lstm_model(vocab_size: int = 10000,
             )
         ),
         Dense(1, activation='sigmoid')
-    ])
-    
+    ], name="BiLSTM")
+
     return model
